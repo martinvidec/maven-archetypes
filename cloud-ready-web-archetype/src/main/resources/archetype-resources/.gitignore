@@ -1,0 +1,70 @@
+# Maven
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+# IDE
+.idea/
+*.iws
+*.iml
+*.ipr
+.vscode/
+.settings/
+.project
+.classpath
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Runtime
+*.pid
+*.seed
+*.lock
+
+# Coverage reports
+*.coverage
+coverage/
+.nyc_output/
+
+# Dependency directories
+node_modules/
+
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*.bak
+
+# Application specific
+application-local.yml
+application-local.properties
+
+# Docker
+.docker/
+
+# Security
+*.pem
+*.key
+*.crt
+*.p12
+*.jks
+
+# Database
+*.db
+*.sqlite
+
+# Cache
+.cache/

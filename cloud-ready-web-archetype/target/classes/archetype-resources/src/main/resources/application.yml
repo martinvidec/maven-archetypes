@@ -1,0 +1,109 @@
+spring:
+  application:
+    name: ${artifactId}
+  
+  profiles:
+    active: dev
+  
+  datasource:
+    url: jdbc:postgresql://localhost:5432/\${artifactId}
+    username: \${artifactId}_user
+    password: \${artifactId}_password
+    driver-class-name: org.postgresql.Driver
+  
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+        generate_statistics: false
+  
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    baseline-on-migrate: true
+  
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      password: ""
+      timeout: 2000ms
+      lettuce:
+        pool:
+          max-active: 8
+          max-idle: 8
+          min-idle: 0
+  
+  cache:
+    type: caffeine
+    caffeine:
+      spec: maximumSize=1000,expireAfterAccess=300s
+  
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          # IMPORTANT: Replace these values with your actual Keycloak/OpenID Connect realm endpoints.
+          # You can set these via environment variables or system properties.
+          issuer-uri: ${JWT_ISSUER_URI:http://localhost:8080/auth/realms/your-realm}
+          jwk-set-uri: ${JWT_JWK_SET_URI:http://localhost:8080/auth/realms/your-realm/protocol/openid-connect/certs}
+
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+      base-path: /actuator
+  endpoint:
+    health:
+      show-details: when-authorized
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+
+logging:
+  level:
+    ${package}: INFO
+    org.springframework.security: INFO
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+
+app:
+  name: ${artifactId}
+  version: ${version}
+  description: Cloud-ready web application generated from archetype
+  cors:
+    allowed-origins:
+      - "http://localhost:3000"
+      - "http://localhost:4200"
+    allowed-methods:
+      - GET
+      - POST
+      - PUT
+      - DELETE
+      - PATCH
+      - OPTIONS
+    allowed-headers:
+      - "*"
+    allow-credentials: true
+    max-age: 3600
+  security:
+    jwt:
+      header: Authorization
+      prefix: "Bearer "
+      expiration: 86400
+    password:
+      strength: 8
+  pagination:
+    default-page-size: 20
+    max-page-size: 100
