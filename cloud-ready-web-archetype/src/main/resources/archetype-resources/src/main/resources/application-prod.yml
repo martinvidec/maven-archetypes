@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: \${DATABASE_URL:jdbc:postgresql://localhost:5432/${artifactId}}
-    username: \${DATABASE_USERNAME:${artifactId}_user}
-    password: \${DATABASE_PASSWORD:${artifactId}_password}
+    url: jdbc:postgresql://localhost:5432/${artifactId}
+    username: ${artifactId}_user
+    password: ${artifactId}_password
   
   jpa:
     hibernate:
@@ -14,20 +14,18 @@ spring:
   
   data:
     redis:
-      host: \${REDIS_HOST:localhost}
-      port: \${REDIS_PORT:6379}
-      password: \${REDIS_PASSWORD:}
+      host: localhost
+      port: 6379
+      password: ""
 
 server:
-  port: \${PORT:8080}
+  port: 8080
 
 logging:
   level:
     ${package}: INFO
     org.springframework.security: WARN
     org.hibernate.SQL: WARN
-  file:
-    name: /var/log/${artifactId}/${artifactId}.log
 
 management:
   endpoints:
