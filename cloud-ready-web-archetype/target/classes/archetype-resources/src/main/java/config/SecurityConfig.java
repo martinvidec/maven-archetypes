@@ -38,14 +38,13 @@ public class SecurityConfig {
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .exceptionHandling(ex -> ex.authenticationEntryPoint(jwtAuthenticationEntryPoint))
             .headers(headers -> headers
-                .frameOptions().deny()
-                .contentTypeOptions().and()
+                .frameOptions(frameOptions -> frameOptions.deny())
+                .contentTypeOptions(contentTypeOptions -> {})
                 .httpStrictTransportSecurity(hstsConfig -> hstsConfig
                     .requestMatcher(request -> request.isSecure())
-                    .includeSubdomains(true)
+                    .includeSubDomains(true)
                     .maxAgeInSeconds(31536000))
-                .referrerPolicy(ReferrerPolicyHeaderWriter.ReferrerPolicy.STRICT_ORIGIN_WHEN_CROSS_ORIGIN)
-                .and())
+                .referrerPolicy(ReferrerPolicyHeaderWriter.ReferrerPolicy.STRICT_ORIGIN_WHEN_CROSS_ORIGIN))
             .authorizeHttpRequests(authz -> authz
                 .requestMatchers("/api/public/**", "/actuator/health/**", "/swagger-ui/**", "/api-docs/**").permitAll()
                 .requestMatchers("/actuator/**").hasRole("ADMIN")
