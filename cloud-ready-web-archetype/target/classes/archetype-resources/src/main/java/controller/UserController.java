@@ -64,7 +64,7 @@ public class UserController extends BaseController {
         @ApiResponse(responseCode = "404", description = "User not found"),
         @ApiResponse(responseCode = "403", description = "Access denied")
     })
-    @PreAuthorize("hasRole('ADMIN') or authentication.name == @userService.findById(#id).map(#u -> #u.username).orElse('')")
+    @PreAuthorize("hasRole('ADMIN') or authentication.name == @userService.findById(#id).orElse(new ${package}.dto.UserDto()).username")
     public ResponseEntity<UserDto> getUserById(
             @Parameter(description = "User ID") @PathVariable Long id) {
         
