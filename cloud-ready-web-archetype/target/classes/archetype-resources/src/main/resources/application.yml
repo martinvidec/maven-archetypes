@@ -47,8 +47,10 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: http://localhost:8080/auth/realms/your-realm
-          jwk-set-uri: http://localhost:8080/auth/realms/your-realm/protocol/openid-connect/certs
+          # IMPORTANT: Replace these values with your actual Keycloak/OpenID Connect realm endpoints.
+          # You can set these via environment variables or system properties.
+          issuer-uri: ${JWT_ISSUER_URI:http://localhost:8080/auth/realms/your-realm}
+          jwk-set-uri: ${JWT_JWK_SET_URI:http://localhost:8080/auth/realms/your-realm/protocol/openid-connect/certs}
 
 server:
   port: 8080
