@@ -10,9 +10,9 @@ import org.springframework.scheduling.annotation.EnableAsync;
 @EnableCaching
 @EnableJpaAuditing
 @EnableAsync
-public class ${artifactId}Application {
+public class Application {
 
     public static void main(String[] args) {
-        SpringApplication.run(${artifactId}Application.class, args);
+        SpringApplication.run(Application.class, args);
     }
 }
