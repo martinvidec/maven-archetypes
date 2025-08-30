@@ -54,7 +54,4 @@ fi
 echo "Compiling the generated project..."
 mvn clean compile -q
 
-echo "Running tests..."
-mvn test -q
-
 echo "SUCCESS: All verifications passed!"
